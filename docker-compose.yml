@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: railway-postgres
+    environment:
+      POSTGRES_DB: railway
+      POSTGRES_USER: railway
+      POSTGRES_PASSWORD: railway_dev_only
+    ports: ["5432:5432"]
+    volumes: ["railway_pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U railway -d railway"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  ollama:
+    image: ollama/ollama:latest
+    container_name: railway-ollama
+    ports: ["11434:11434"]
+    volumes: ["ollama_data:/root/.ollama"]
+volumes:
+  railway_pgdata:
+  ollama_data:

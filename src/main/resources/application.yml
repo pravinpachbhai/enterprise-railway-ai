@@ -1,0 +1,43 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: enterprise-railway-ai
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/railway}
+    username: ${SPRING_DATASOURCE_USERNAME:railway}
+    password: ${SPRING_DATASOURCE_PASSWORD:railway_dev_only}
+  flyway:
+    enabled: true
+  ai:
+    ollama:
+      base-url: ${SPRING_AI_OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${SPRING_AI_OLLAMA_CHAT_OPTIONS_MODEL:llama3.2:3b}
+      embedding:
+        options:
+          model: ${SPRING_AI_OLLAMA_EMBEDDING_OPTIONS_MODEL:nomic-embed-text}
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: 768
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        table-name: vector_store
+        schema-name: public
+  mcp:
+    server:
+      name: railway-operations-mcp
+      version: 1.0.0
+      type: SYNC
+      instructions: "Read-only railway lookup and policy search tools. Notification dispatch is controlled by the workflow REST API."
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+logging:
+  level:
+    root: INFO
+    com.example.railway: INFO
