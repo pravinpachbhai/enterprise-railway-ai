@@ -58,5 +58,4 @@ Search policy:
 curl -X POST http://localhost:8080/api/rag/search -H "Content-Type: application/json" -d "{\"query\":\"delay of 30 minutes notification\",\"topK\":4}"
 ```
 
-## Important
-This is an educational MVP, not railway-certified software. Seeded train/customer data is fictional. Authentication, secrets management, tenant isolation, rate limits, production-grade approval identity, provider integrations, and operational safety review must be added before production use. Notifications are simulated and recorded as `SENT` only by the mock adapter.
+
