@@ -28,7 +28,7 @@ App: http://localhost:8080
 Health: http://localhost:8080/actuator/health  
 MCP endpoint is served by Spring AI MCP server configuration (Streamable HTTP/SSE transport according to the configured starter).
 
-## Try it
+## Test
 Create an incident:
 ```bash
 curl -X POST http://localhost:8080/api/incidents -H "Content-Type: application/json" -d "{\"trainId\":\"BNSF-7821\",\"delayMinutes\":45,\"cause\":\"TRACK_OBSTRUCTION\",\"description\":\"Track obstruction near milepost 42\"}"
